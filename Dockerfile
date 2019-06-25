@@ -1,18 +1,14 @@
-FROM centos:7 as builder
+FROM centos:7 
 
-ENV GOROOT /usr/lib/golang
-ENV GOPATH /opt/golang
+
 
 RUN yum -y install golang git make
 RUN echo $GOPATH $GOROOT
 
-WORKDIR /opt/golang
+WORKDIR /opt/ngrok
 RUN git clone https://github.com/inconshreveable/ngrok
 RUN cd ngrok && make
 
-
-
-WORKDIR /opt/ngrok
 ENTRYPOINT ["./scripts/entrypoint.sh"]
 
 COPY --from=builder /opt/golang/ngrok/bin/ngrok* /usr/local/bin/
