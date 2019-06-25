@@ -10,7 +10,7 @@ WORKDIR /opt/golang
 RUN git clone https://github.com/inconshreveable/ngrok
 RUN cd ngrok && make
 
-FROM centos:7
+
 
 WORKDIR /opt/ngrok
 ENTRYPOINT ["./scripts/entrypoint.sh"]
